@@ -1,4 +1,4 @@
-from django.contrib import admin
+"""from django.contrib import admin
 from .models import Evento
 
 # Register your models here.
@@ -9,3 +9,11 @@ class EventoAdmin(admin.ModelAdmin):
 
 admin .site.register(Evento, EventoAdmin)
 
+"""
+from django.contrib import admin
+from core.models import Evento
+
+class EventoAdmin(admin.ModelAdmin):
+    list_filter = ('data_evento',)  # Remova 'usuario' aqui
+
+admin.site.register(Evento, EventoAdmin)
