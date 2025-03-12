@@ -17,9 +17,50 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from core import views
-
+'''
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('agenda/', views.lista_eventos),
-    path('', views.lista_eventos, name='home'),
+    #path('', views.lista_eventos, name='home'),
+    path('', views.index),
+    path('/login/', viwes.login_user) 
+]   
+
+from django.contrib import admin
+from django.urls import path
+from core import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.index),  # Certifique-se de que o nome da view está correto aqui
+    #path('eventos/', views.lista_eventos, name='lista_eventos'),coloquei abaixo a sugestao
+    path('agenda/', views.lista_eventos, name='lista_eventos'),
+    
+
+] '''
+'''
+from django.contrib import admin
+from django.urls import path
+from core import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.index),
+    path('agenda/', views.lista_eventos, name='lista_eventos'),  # Adicione esta linha
+    path('eventos/', views.lista_eventos, name='lista_eventos'),
+    path('login/', views.login_user, name='login_user'),
+]
+'''
+from django.contrib import admin
+from django.urls import path
+from core import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.index, name='index'),
+    path('agenda/', views.lista_eventos, name='lista_eventos'),
+    path('login/', views.login_user, name='login_user'),
+    path('agenda/login/', views.login_user, name='agenda_login_user'),
+    path('agenda/login/submit/', views.submit_login, name='submit_login'),
+    path('logout/', views.logout_user, name='logout'), # Adicionado name='logout'
 ]

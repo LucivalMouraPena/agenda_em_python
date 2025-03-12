@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Agenda</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form action="/agenda/login/submit/" method="post"> {% csrf_token %}
+        <div align="center">
+            <label for="username">Usuário</label>
+            <input type="text" id="username" name="username">
+            <label for="password">Senha</label>
+            <input type="password" id="password" name="password">
+            <button type="submit">Entrar</button>
+        </div>
+    </form>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                    <div align="center">
+                    <strong>Erro: </strong> {{ message }}
+                    </div> 
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
