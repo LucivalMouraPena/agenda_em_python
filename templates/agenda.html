@@ -1,16 +1,17 @@
-   {% extends "model-page.html" %}
-   {% block content %} 
+{% extends "model-page.html" %}
+{% block content %}
 
+<h2>Agendamentos</h2>
+<button type="button" onclick="window.location.href='{% url 'evento' %}'">Novo Evento</button>
 
-    <h2>Agendamentos</h2>
-    <ul>
-
+<ul>
     {% for evento in eventos %}
-       <li> {{evento.titulo}} - {{ evento.get_data_evento}}</li>
+        <li>
+            {{ evento.titulo }} - {{ evento.get_data_evento }}
+            <a href="evento/?id={{ evento.id}}">Editar</a>
+            <a href="{% url 'excluir_evento' evento.id %}">Excluir</a>
+        </li>
     {% endfor %}
+</ul>
 
-    </ul>
-
-    {% endblock %}
-    
-
+{% endblock %}

@@ -51,16 +51,21 @@ urlpatterns = [
     path('login/', views.login_user, name='login_user'),
 ]
 '''
+
 from django.contrib import admin
 from django.urls import path
 from core import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('agenda/', views.lista_eventos, name='lista_eventos'),
+    path('agenda/evento/', views.evento, name='evento'),
+    path('agenda/evento/delete/<int:id_evento>', views.delete_evento, name='excluir_evento'),
     path('login/', views.login_user, name='login_user'),
     path('agenda/login/', views.login_user, name='agenda_login_user'),
     path('agenda/login/submit/', views.submit_login, name='submit_login'),
-    path('logout/', views.logout_user, name='logout'), # Adicionado name='logout'
+    path('logout/', views.logout_user, name='logout'),
+    path('agenda/evento/criar/', views.criar_evento, name='criar_evento'),
+    path('agenda/evento/editar/<int:id_evento>/', views.editar_evento, name='editar_evento'),
 ]
