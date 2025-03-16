@@ -57,8 +57,11 @@ from django.urls import path
 from core import views
 
 urlpatterns = [
-     path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', views.index, name='index'),
+    path('agenda/lista/json/', views.json_lista_eventos, name='json_lista_eventos'),
+    
+    path('agenda/lista/', views.json_lista_eventos, name='json_lista_eventos'),
     path('agenda/', views.lista_eventos, name='lista_eventos'),
     path('agenda/evento/', views.evento, name='evento'),
     path('agenda/evento/delete/<int:id_evento>', views.delete_evento, name='excluir_evento'),

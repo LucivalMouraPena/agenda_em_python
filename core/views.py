@@ -73,6 +73,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils import timezone
 
+from django.http import Http404, JsonResponse
+
 @login_required(login_url='/login/')
 def lista_eventos(request):
     usuario = request.user
@@ -86,8 +88,9 @@ def index(request):
 @login_required(login_url='/login/')
 def evento(request):
     id_evento = request.GET.get('id')
+    dados = {}
     evento = get_object_or_404(Evento, id=id_evento) if id_evento else None
-    return render(request, 'evento.html', {'evento': evento})
+    return render(request, 'evento.html', dados or {'evento': evento})
 
 def criar_evento(request):
     if request.method == 'POST':
@@ -170,3 +173,17 @@ def submit_login(request):
             return redirect('/login/')
     else:
         return redirect('/login/')
+    
+
+from datetime import datetime, timedelta
+from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+from .models import Evento
+
+@login_required(login_url='/login/')
+def json_lista_eventos(request):
+    usuario = request.user
+    data_atual = datetime.now() - timedelta(hours=1)
+    eventos = Evento.objects.filter(usuario=usuario).values('id', 'titulo',)
+
+    return JsonResponse(list(eventos.values('id', 'titulo', 'data_evento')), safe=False)
